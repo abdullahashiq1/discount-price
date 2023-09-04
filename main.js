@@ -27,10 +27,26 @@ document.querySelector('#btn-apply').addEventListener('click', function(){
 const promoPrice = document.getElementById('promo-price');
 const promoCode = document.getElementById('promo-code');
 
+const priceDisplay = document.getElementById('coupon-price');
+const discountDisplay = document.getElementById('discount-price');
+const alertError = document.querySelector('#alert');
+
 document.getElementById('coupon-btn').addEventListener('click', function(){
-   const promoPriceValue = promoPrice.value;
-   const promoCodeValue = promoCode.value;
-   console.log(promoPriceValue, promoCodeValue)
+    const promoPriceValue = promoPrice.value;
+    const promoCodeValue = promoCode.value;
+
+    if(!isNaN(promoPriceValue) && promoCodeValue === "DISC30"){
+        const discountPrice = (30/100) * promoPriceValue;
+        const finalPrice = promoPriceValue - discountPrice;
+        const discountPriceFixed = discountPrice.toFixed(2);
+        discountDisplay.innerText = discountPriceFixed;
+
+        const finalPriceFixed = finalPrice.toFixed(2);
+        priceDisplay.innerText = finalPriceFixed;
+    }
+    else{
+        alertError.textContent = "Please enter correct coupon code or valid input";
+    }
     
 })
 
